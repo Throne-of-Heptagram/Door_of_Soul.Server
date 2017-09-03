@@ -4,11 +4,11 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{09DE381F-D6D7-48FC-93B5-8B84660CB3F3}</ProjectGuid>
+    <ProjectGuid>{4FEC3B33-6378-426A-AABE-2CE60F8F99DA}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>Door_of_Soul.Server</RootNamespace>
-    <AssemblyName>Door_of_Soul.Server</AssemblyName>
+    <RootNamespace>Door_of_Soul.HexagramEntranceServer</RootNamespace>
+    <AssemblyName>Door_of_Soul.HexagramEntranceServer</AssemblyName>
     <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
   </PropertyGroup>
@@ -40,14 +40,29 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="DeviceFactory.cs" />
+    <Compile Include="AnswerFactory.cs" />
+    <Compile Include="AvatarFactory.cs" />
+    <Compile Include="EntityFactory.cs" />
+    <Compile Include="HexagramEntranceAnswer.cs" />
+    <Compile Include="HexagramEntranceAvatar.cs" />
+    <Compile Include="HexagramEntranceEntity.cs" />
+    <Compile Include="HexagramEntranceScene.cs" />
+    <Compile Include="HexagramEntranceSoul.cs" />
+    <Compile Include="HexagramEntranceSystem.cs" />
+    <Compile Include="HexagramEntranceWorld.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="ServerDevice.cs" />
+    <Compile Include="SceneFactory.cs" />
+    <Compile Include="SoulFactory.cs" />
+    <Compile Include="WorldFactory.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\..\Door_of_Soul.Communication\Door_of_Soul.Communication.Infrastructure.Server\Door_of_Soul.Communication.Infrastructure.Server.csproj">
-      <Project>{7c8f3139-2d2c-4ec2-8530-35348424db31}</Project>
-      <Name>Door_of_Soul.Communication.Infrastructure.Server</Name>
+    <ProjectReference Include="..\..\Door_of_Soul.Communication\Door_of_Soul.Communication.HexagramEntranceServer\Door_of_Soul.Communication.HexagramEntranceServer.csproj">
+      <Project>{c2d33ac7-1022-41c4-b7ee-37e61c58eb53}</Project>
+      <Name>Door_of_Soul.Communication.HexagramEntranceServer</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Door_of_Soul.Core\Door_of_Soul.Core.HexagramEntranceServer\Door_of_Soul.Core.HexagramEntranceServer.csproj">
+      <Project>{e02fb674-13e0-403e-a6f3-88aa421de13a}</Project>
+      <Name>Door_of_Soul.Core.HexagramEntranceServer</Name>
     </ProjectReference>
     <ProjectReference Include="..\..\Door_of_Soul.Core\Door_of_Soul.Core\Door_of_Soul.Core.csproj">
       <Project>{34c59e1e-eee2-4b13-9802-39dae818abfd}</Project>
