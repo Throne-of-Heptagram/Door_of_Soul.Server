@@ -47,6 +47,8 @@
     <Compile Include="HexagramEntranceAvatar.cs" />
     <Compile Include="HexagramEntranceEntity.cs" />
     <Compile Include="HexagramEntranceScene.cs" />
+    <Compile Include="HexagramEntranceServerInitializer.cs" />
+    <Compile Include="HexagramEntranceServerSystem.cs" />
     <Compile Include="HexagramEntranceSoul.cs" />
     <Compile Include="HexagramEntranceSystem.cs" />
     <Compile Include="HexagramEntranceWorld.cs" />
@@ -56,10 +58,6 @@
     <Compile Include="WorldFactory.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\..\Door_of_Soul.Communication\Door_of_Soul.Communication.HexagramEntranceServer\Door_of_Soul.Communication.HexagramEntranceServer.csproj">
-      <Project>{c2d33ac7-1022-41c4-b7ee-37e61c58eb53}</Project>
-      <Name>Door_of_Soul.Communication.HexagramEntranceServer</Name>
-    </ProjectReference>
     <ProjectReference Include="..\..\Door_of_Soul.Core\Door_of_Soul.Core.HexagramEntranceServer\Door_of_Soul.Core.HexagramEntranceServer.csproj">
       <Project>{e02fb674-13e0-403e-a6f3-88aa421de13a}</Project>
       <Name>Door_of_Soul.Core.HexagramEntranceServer</Name>
@@ -67,6 +65,10 @@
     <ProjectReference Include="..\..\Door_of_Soul.Core\Door_of_Soul.Core\Door_of_Soul.Core.csproj">
       <Project>{34c59e1e-eee2-4b13-9802-39dae818abfd}</Project>
       <Name>Door_of_Soul.Core</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Door_of_Soul.Server\Door_of_Soul.Server.csproj">
+      <Project>{a86ebb94-d15d-465f-8c8d-47ebffb2d3b1}</Project>
+      <Name>Door_of_Soul.Server</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

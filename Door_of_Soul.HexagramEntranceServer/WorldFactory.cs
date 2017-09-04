@@ -2,7 +2,7 @@
 
 namespace Door_of_Soul.HexagramEntranceServer
 {
-    public class WorldFactory : GenericSubjectRepository<int, HexagramEntranceWorld>
+    class WorldFactory : GenericSubjectRepository<int, HexagramEntranceWorld>
     {
         public static WorldFactory Instance { get; private set; } = new WorldFactory();
 

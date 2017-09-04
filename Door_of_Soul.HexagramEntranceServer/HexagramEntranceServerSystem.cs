@@ -2,7 +2,7 @@
 
 namespace Door_of_Soul.HexagramEntranceServer
 {
-    class HexagramEntranceAnswer : VirtualAnswer
+    class HexagramEntranceServerSystem : VirtualSystem
     {
     }
 }

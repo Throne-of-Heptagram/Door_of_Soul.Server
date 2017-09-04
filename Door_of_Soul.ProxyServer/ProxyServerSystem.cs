@@ -2,7 +2,7 @@
 
 namespace Door_of_Soul.ProxyServer
 {
-    class ProxyAvatar : VirtualAvatar
+    class ProxyServerSystem : VirtualSystem
     {
     }
 }

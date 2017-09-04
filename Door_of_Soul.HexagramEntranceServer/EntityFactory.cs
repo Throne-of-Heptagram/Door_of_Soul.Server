@@ -2,7 +2,7 @@
 
 namespace Door_of_Soul.HexagramEntranceServer
 {
-    public class EntityFactory : GenericSubjectRepository<int, HexagramEntranceEntity>
+    class EntityFactory : GenericSubjectRepository<int, HexagramEntranceEntity>
     {
         public static EntityFactory Instance { get; private set; } = new EntityFactory();
 

@@ -2,7 +2,7 @@
 
 namespace Door_of_Soul.SceneServer
 {
-    public class WorldFactory : GenericSubjectRepository<int, ObservableWorld>
+    class WorldFactory : GenericSubjectRepository<int, ObservableWorld>
     {
         public static WorldFactory Instance { get; private set; } = new WorldFactory();
 

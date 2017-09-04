@@ -2,7 +2,7 @@
 
 namespace Door_of_Soul.SceneServer
 {
-    class ObservableWorld : VirtualWorld
+    class SceneServerSystem : VirtualSystem
     {
     }
 }

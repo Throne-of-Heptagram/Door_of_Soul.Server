@@ -2,7 +2,7 @@
 
 namespace Door_of_Soul.SceneServer
 {
-    public class ObservableEntity : VirtualEntity
+    class ObservableEntity : VirtualEntity
     {
     }
 }

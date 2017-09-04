@@ -1,14 +1,14 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<Project ToolsVersion="14.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+<Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{98AB15C5-80B3-4FB8-AC42-DA103F19C182}</ProjectGuid>
+    <ProjectGuid>{C025201D-0079-4F61-9593-66508E2E6E93}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>Door_of_Soul.ProxyServer</RootNamespace>
-    <AssemblyName>Door_of_Soul.ProxyServer</AssemblyName>
+    <RootNamespace>Door_of_Soul.HexagramKnowledgeServer</RootNamespace>
+    <AssemblyName>Door_of_Soul.HexagramKnowledgeServer</AssemblyName>
     <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
   </PropertyGroup>
@@ -40,28 +40,26 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="AnswerFactory.cs" />
-    <Compile Include="AvatarFactory.cs" />
+    <Compile Include="HexagramKnowledge.cs" />
+    <Compile Include="HexagramKnowledgeServerInitializer.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="ProxyAnswer.cs" />
-    <Compile Include="ProxyAvatar.cs" />
-    <Compile Include="ProxyServerInitializer.cs" />
-    <Compile Include="ProxyServerSystem.cs" />
-    <Compile Include="ProxySoul.cs" />
-    <Compile Include="SoulFactory.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\..\Door_of_Soul.Communication\Door_of_Soul.Communication.ProxyServer\Door_of_Soul.Communication.ProxyServer.csproj">
-      <Project>{4f9ef772-8fe2-4ddd-9c96-2d62093df94d}</Project>
-      <Name>Door_of_Soul.Communication.ProxyServer</Name>
+    <ProjectReference Include="..\..\Door_of_Soul.Communication\Door_of_Soul.Communication.HexagramNodeServer\Door_of_Soul.Communication.HexagramNodeServer.csproj">
+      <Project>{9b95b70f-0310-43a6-8592-47c05ff610ef}</Project>
+      <Name>Door_of_Soul.Communication.HexagramNodeServer</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Door_of_Soul.Communication\Door_of_Soul.Communication.Protocol.Hexagram\Door_of_Soul.Communication.Protocol.Hexagram.csproj">
+      <Project>{d7a33245-4cc4-4528-9603-3051d6022120}</Project>
+      <Name>Door_of_Soul.Communication.Protocol.Hexagram</Name>
     </ProjectReference>
     <ProjectReference Include="..\..\Door_of_Soul.Communication\Door_of_Soul.Communication\Door_of_Soul.Communication.csproj">
       <Project>{90c6178d-f9ee-4160-b7e6-d450afe03bec}</Project>
       <Name>Door_of_Soul.Communication</Name>
     </ProjectReference>
-    <ProjectReference Include="..\..\Door_of_Soul.Core\Door_of_Soul.Core.ProxyServer\Door_of_Soul.Core.ProxyServer.csproj">
-      <Project>{a5f50141-ccc2-487a-a6e6-8e40e7ec690b}</Project>
-      <Name>Door_of_Soul.Core.ProxyServer</Name>
+    <ProjectReference Include="..\..\Door_of_Soul.Core\Door_of_Soul.Core.HexagramNodeServer\Door_of_Soul.Core.HexagramNodeServer.csproj">
+      <Project>{6dda6ed9-24fe-4036-9fa8-37279a2be41c}</Project>
+      <Name>Door_of_Soul.Core.HexagramNodeServer</Name>
     </ProjectReference>
     <ProjectReference Include="..\..\Door_of_Soul.Core\Door_of_Soul.Core\Door_of_Soul.Core.csproj">
       <Project>{34c59e1e-eee2-4b13-9802-39dae818abfd}</Project>
@@ -73,11 +71,4 @@
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
-  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
-       Other similar extension points exist, see Microsoft.Common.targets.
-  <Target Name="BeforeBuild">
-  </Target>
-  <Target Name="AfterBuild">
-  </Target>
-  -->
 </Project>

@@ -2,7 +2,7 @@
 
 namespace Door_of_Soul.ProxyServer
 {
-    public class ProxyAnswer : TerminalAnswer
+    class ProxyAnswer : TerminalAnswer
     {
     }
 }

@@ -2,7 +2,7 @@
 
 namespace Door_of_Soul.ProxyServer
 {
-    public class AvatarFactory : GenericSubjectRepository<int, ProxyAvatar>
+    class AvatarFactory : GenericSubjectRepository<int, ProxyAvatar>
     {
         public static AvatarFactory Instance { get; private set; } = new AvatarFactory();
 

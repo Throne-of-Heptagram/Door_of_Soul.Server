@@ -2,7 +2,7 @@
 
 namespace Door_of_Soul.SceneServer
 {
-    public class ObservableScene : TerminalScene
+    class ObservableScene : TerminalScene
     {
     }
 }
