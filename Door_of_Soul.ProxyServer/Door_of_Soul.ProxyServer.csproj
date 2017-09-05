@@ -46,6 +46,7 @@
     <Compile Include="ProxyAnswer.cs" />
     <Compile Include="ProxyAvatar.cs" />
     <Compile Include="ProxyServerInitializer.cs" />
+    <Compile Include="ProxyServerResourceService.cs" />
     <Compile Include="ProxyServerSystem.cs" />
     <Compile Include="ProxySoul.cs" />
     <Compile Include="SoulFactory.cs" />

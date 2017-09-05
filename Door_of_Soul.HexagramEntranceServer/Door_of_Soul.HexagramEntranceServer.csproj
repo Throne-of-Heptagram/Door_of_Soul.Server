@@ -48,6 +48,7 @@
     <Compile Include="HexagramEntranceEntity.cs" />
     <Compile Include="HexagramEntranceScene.cs" />
     <Compile Include="HexagramEntranceServerInitializer.cs" />
+    <Compile Include="HexagramEntranceServerResourceService.cs" />
     <Compile Include="HexagramEntranceServerSystem.cs" />
     <Compile Include="HexagramEntranceSoul.cs" />
     <Compile Include="HexagramEntranceSystem.cs" />
@@ -58,6 +59,22 @@
     <Compile Include="WorldFactory.cs" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\..\Door_of_Soul.Communication\Door_of_Soul.Communication.HexagramEntranceServer\Door_of_Soul.Communication.HexagramEntranceServer.csproj">
+      <Project>{c2d33ac7-1022-41c4-b7ee-37e61c58eb53}</Project>
+      <Name>Door_of_Soul.Communication.HexagramEntranceServer</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Door_of_Soul.Communication\Door_of_Soul.Communication.Protocol.Hexagram\Door_of_Soul.Communication.Protocol.Hexagram.csproj">
+      <Project>{d7a33245-4cc4-4528-9603-3051d6022120}</Project>
+      <Name>Door_of_Soul.Communication.Protocol.Hexagram</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Door_of_Soul.Communication\Door_of_Soul.Communication.Protocol.Internal\Door_of_Soul.Communication.Protocol.Internal.csproj">
+      <Project>{d82bd596-1a35-4e4c-bc1e-2e27cd3e9812}</Project>
+      <Name>Door_of_Soul.Communication.Protocol.Internal</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Door_of_Soul.Communication\Door_of_Soul.Communication\Door_of_Soul.Communication.csproj">
+      <Project>{90c6178d-f9ee-4160-b7e6-d450afe03bec}</Project>
+      <Name>Door_of_Soul.Communication</Name>
+    </ProjectReference>
     <ProjectReference Include="..\..\Door_of_Soul.Core\Door_of_Soul.Core.HexagramEntranceServer\Door_of_Soul.Core.HexagramEntranceServer.csproj">
       <Project>{e02fb674-13e0-403e-a6f3-88aa421de13a}</Project>
       <Name>Door_of_Soul.Core.HexagramEntranceServer</Name>

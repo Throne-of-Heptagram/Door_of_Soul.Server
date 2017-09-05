@@ -1,4 +1,5 @@
-﻿using Door_of_Soul.Core.ProxyServer;
+﻿using Door_of_Soul.Communication.ProxyServer;
+using Door_of_Soul.Core.ProxyServer;
 using Door_of_Soul.Server;
 using System;
 
@@ -10,6 +11,7 @@ namespace Door_of_Soul.ProxyServer
         {
             try
             {
+                ResourceService.Initialize(new ProxyServerResourceService());
                 VirtualSystem.Initialize(new ProxyServerSystem());
 
                 errorMessage = "";

@@ -1,4 +1,5 @@
-﻿using Door_of_Soul.Core.HexagramEntranceServer;
+﻿using Door_of_Soul.Communication.HexagramEntranceServer;
+using Door_of_Soul.Core.HexagramEntranceServer;
 using Door_of_Soul.Server;
 using System;
 
@@ -10,6 +11,7 @@ namespace Door_of_Soul.HexagramEntranceServer
         {
             try
             {
+                ResourceService.Initialize(new HexagramEntranceServerResourceService());
                 VirtualSystem.Initialize(new HexagramEntranceServerSystem());
 
                 errorMessage = "";
