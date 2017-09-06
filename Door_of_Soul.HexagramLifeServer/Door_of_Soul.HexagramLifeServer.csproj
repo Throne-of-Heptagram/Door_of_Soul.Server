@@ -1,0 +1,74 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{907D911F-DB2A-493C-B39C-C39DC4CC6516}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>Door_of_Soul.HexagramLifeServer</RootNamespace>
+    <AssemblyName>Door_of_Soul.HexagramLifeServer</AssemblyName>
+    <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Net.Http" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="HexagramLife.cs" />
+    <Compile Include="HexagramLifeServerInitializer.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\Door_of_Soul.Communication\Door_of_Soul.Communication.HexagramNodeServer\Door_of_Soul.Communication.HexagramNodeServer.csproj">
+      <Project>{9b95b70f-0310-43a6-8592-47c05ff610ef}</Project>
+      <Name>Door_of_Soul.Communication.HexagramNodeServer</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Door_of_Soul.Communication\Door_of_Soul.Communication.Protocol.Hexagram\Door_of_Soul.Communication.Protocol.Hexagram.csproj">
+      <Project>{d7a33245-4cc4-4528-9603-3051d6022120}</Project>
+      <Name>Door_of_Soul.Communication.Protocol.Hexagram</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Door_of_Soul.Communication\Door_of_Soul.Communication\Door_of_Soul.Communication.csproj">
+      <Project>{90c6178d-f9ee-4160-b7e6-d450afe03bec}</Project>
+      <Name>Door_of_Soul.Communication</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Door_of_Soul.Core\Door_of_Soul.Core.HexagramNodeServer\Door_of_Soul.Core.HexagramNodeServer.csproj">
+      <Project>{6dda6ed9-24fe-4036-9fa8-37279a2be41c}</Project>
+      <Name>Door_of_Soul.Core.HexagramNodeServer</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Door_of_Soul.Core\Door_of_Soul.Core\Door_of_Soul.Core.csproj">
+      <Project>{34c59e1e-eee2-4b13-9802-39dae818abfd}</Project>
+      <Name>Door_of_Soul.Core</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Door_of_Soul.Server\Door_of_Soul.Server.csproj">
+      <Project>{a86ebb94-d15d-465f-8c8d-47ebffb2d3b1}</Project>
+      <Name>Door_of_Soul.Server</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+</Project>

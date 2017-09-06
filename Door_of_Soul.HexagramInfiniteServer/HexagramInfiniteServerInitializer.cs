@@ -1,22 +1,22 @@
 ﻿using Door_of_Soul.Communication.HexagramNodeServer.Hexagram;
 using Door_of_Soul.Communication.HexagramNodeServer.Hexagram.OperationRouter;
-using Door_of_Soul.Communication.HexagramNodeServer.Knowledge;
-using Door_of_Soul.Communication.Protocol.Hexagram.Knowledge;
+using Door_of_Soul.Communication.HexagramNodeServer.Infinite;
+using Door_of_Soul.Communication.Protocol.Hexagram.Infinite;
 using Door_of_Soul.Core.HexagramNodeServer;
 using Door_of_Soul.Server;
 using System;
 
-namespace Door_of_Soul.HexagramKnowledgeServer
+namespace Door_of_Soul.HexagramInfiniteServer
 {
-    public class HexagramKnowledgeServerInitializer : ServerInitializer
+    public class HexagramInfiniteServerInitializer : ServerInitializer
     {
         public override bool Initialize(out string errorMessage)
         {
             try
             {
-                HexagramForwardOperationRouter<KnowledgeForwardOperationCode>.Initialize(new KnowledgeForwardOperationRouter());
-                HexagramOperationRequestRouter<KnowledgeEventCode, KnowledgeOperationCode>.Initialize(new KnowledgeOperationRequestRouter());
-                VirtualKnowledge.Initialize(new HexagramKnowledge());
+                HexagramForwardOperationRouter<InfiniteForwardOperationCode>.Initialize(new InfiniteForwardOperationRouter());
+                HexagramOperationRequestRouter<InfiniteEventCode, InfiniteOperationCode>.Initialize(new InfiniteOperationRequestRouter());
+                VirtualInfinite.Initialize(new HexagramInfinite());
 
                 errorMessage = "";
                 return true;
