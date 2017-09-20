@@ -15,7 +15,7 @@ namespace Door_of_Soul.HexagramWillServer
             try
             {
                 HexagramForwardOperationRouter<WillForwardOperationCode>.Initialize(new WillForwardOperationRouter());
-                HexagramOperationRequestRouter<WillEventCode, WillOperationCode>.Initialize(new WillOperationRequestRouter());
+                HexagramOperationRequestRouter<WillEventCode, WillOperationCode, VirtualWill>.Initialize(new WillOperationRequestRouter());
                 VirtualWill.Initialize(new HexagramWill());
 
                 errorMessage = "";

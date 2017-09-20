@@ -10,5 +10,15 @@ namespace Door_of_Soul.ProxyServer
         {
 
         }
+
+        public bool Create(int avatarId, int entityId, string avatarName, int[] soulIds, out ProxyAvatar avatar)
+        {
+            avatar = new ProxyAvatar(avatarId, entityId, avatarName);
+            for (int i = 0; i < soulIds.Length; i++)
+            {
+                avatar.LinkSoul(soulIds[i]);
+            }
+            return Add(avatarId, avatar);
+        }
     }
 }

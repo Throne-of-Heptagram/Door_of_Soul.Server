@@ -15,7 +15,7 @@ namespace Door_of_Soul.HexagramLoveServer
             try
             {
                 HexagramForwardOperationRouter<LoveForwardOperationCode>.Initialize(new LoveForwardOperationRouter());
-                HexagramOperationRequestRouter<LoveEventCode, LoveOperationCode>.Initialize(new LoveOperationRequestRouter());
+                HexagramOperationRequestRouter<LoveEventCode, LoveOperationCode, VirtualLove>.Initialize(new LoveOperationRequestRouter());
                 VirtualLove.Initialize(new HexagramLove());
 
                 errorMessage = "";

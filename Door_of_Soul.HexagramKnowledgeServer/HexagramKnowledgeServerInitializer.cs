@@ -15,7 +15,7 @@ namespace Door_of_Soul.HexagramKnowledgeServer
             try
             {
                 HexagramForwardOperationRouter<KnowledgeForwardOperationCode>.Initialize(new KnowledgeForwardOperationRouter());
-                HexagramOperationRequestRouter<KnowledgeEventCode, KnowledgeOperationCode>.Initialize(new KnowledgeOperationRequestRouter());
+                HexagramOperationRequestRouter<KnowledgeEventCode, KnowledgeOperationCode, VirtualKnowledge>.Initialize(new KnowledgeOperationRequestRouter());
                 VirtualKnowledge.Initialize(new HexagramKnowledge());
 
                 errorMessage = "";

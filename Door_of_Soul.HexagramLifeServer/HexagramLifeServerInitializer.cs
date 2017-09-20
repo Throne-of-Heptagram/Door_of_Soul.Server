@@ -15,7 +15,7 @@ namespace Door_of_Soul.HexagramLifeServer
             try
             {
                 HexagramForwardOperationRouter<LifeForwardOperationCode>.Initialize(new LifeForwardOperationRouter());
-                HexagramOperationRequestRouter<LifeEventCode, LifeOperationCode>.Initialize(new LifeOperationRequestRouter());
+                HexagramOperationRequestRouter<LifeEventCode, LifeOperationCode, VirtualLife>.Initialize(new LifeOperationRequestRouter());
                 VirtualLife.Initialize(new HexagramLife());
 
                 errorMessage = "";

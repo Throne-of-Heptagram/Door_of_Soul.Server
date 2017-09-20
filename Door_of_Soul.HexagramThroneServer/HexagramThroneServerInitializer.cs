@@ -15,7 +15,7 @@ namespace Door_of_Soul.HexagramThroneServer
             try
             {
                 HexagramForwardOperationRouter<ThroneForwardOperationCode>.Initialize(new ThroneForwardOperationRouter());
-                HexagramOperationRequestRouter<ThroneEventCode, ThroneOperationCode>.Initialize(new ThroneOperationRequestRouter());
+                HexagramOperationRequestRouter<ThroneEventCode, ThroneOperationCode, VirtualThrone>.Initialize(new ThroneOperationRequestRouter());
                 VirtualThrone.Initialize(new HexagramThrone());
 
                 errorMessage = "";

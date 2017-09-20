@@ -10,5 +10,15 @@ namespace Door_of_Soul.HexagramEntranceServer
         {
 
         }
+
+        public bool Create(int answerId, string answerName, int[] soulIds, out HexagramEntranceAnswer answer)
+        {
+            answer = new HexagramEntranceAnswer(answerId, answerName);
+            for (int i = 0; i < soulIds.Length; i++)
+            {
+                answer.LinkSoul(soulIds[i]);
+            }
+            return Add(answerId, answer);
+        }
     }
 }

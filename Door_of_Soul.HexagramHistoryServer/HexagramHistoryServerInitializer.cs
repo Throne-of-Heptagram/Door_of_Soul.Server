@@ -15,7 +15,7 @@ namespace Door_of_Soul.HexagramHistoryServer
             try
             {
                 HexagramForwardOperationRouter<HistoryForwardOperationCode>.Initialize(new HistoryForwardOperationRouter());
-                HexagramOperationRequestRouter<HistoryEventCode, HistoryOperationCode>.Initialize(new HistoryOperationRequestRouter());
+                HexagramOperationRequestRouter<HistoryEventCode, HistoryOperationCode, VirtualHistory>.Initialize(new HistoryOperationRequestRouter());
                 VirtualHistory.Initialize(new HexagramHistory());
 
                 errorMessage = "";

@@ -15,7 +15,7 @@ namespace Door_of_Soul.HexagramElementServer
             try
             {
                 HexagramForwardOperationRouter<ElementForwardOperationCode>.Initialize(new ElementForwardOperationRouter());
-                HexagramOperationRequestRouter<ElementEventCode, ElementOperationCode>.Initialize(new ElementOperationRequestRouter());
+                HexagramOperationRequestRouter<ElementEventCode, ElementOperationCode, VirtualElement>.Initialize(new ElementOperationRequestRouter());
                 VirtualElement.Initialize(new HexagramElement());
 
                 errorMessage = "";

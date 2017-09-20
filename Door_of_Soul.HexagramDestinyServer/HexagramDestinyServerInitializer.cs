@@ -1,6 +1,6 @@
-﻿using Door_of_Soul.Communication.HexagramNodeServer.Hexagram;
+﻿using Door_of_Soul.Communication.HexagramNodeServer.Destiny;
+using Door_of_Soul.Communication.HexagramNodeServer.Hexagram;
 using Door_of_Soul.Communication.HexagramNodeServer.Hexagram.OperationRouter;
-using Door_of_Soul.Communication.HexagramNodeServer.Destiny;
 using Door_of_Soul.Communication.Protocol.Hexagram.Destiny;
 using Door_of_Soul.Core.HexagramNodeServer;
 using Door_of_Soul.Server;
@@ -15,7 +15,7 @@ namespace Door_of_Soul.HexagramDestinyServer
             try
             {
                 HexagramForwardOperationRouter<DestinyForwardOperationCode>.Initialize(new DestinyForwardOperationRouter());
-                HexagramOperationRequestRouter<DestinyEventCode, DestinyOperationCode>.Initialize(new DestinyOperationRequestRouter());
+                HexagramOperationRequestRouter<DestinyEventCode, DestinyOperationCode, VirtualDestiny>.Initialize(new DestinyOperationRequestRouter());
                 VirtualDestiny.Initialize(new HexagramDestiny());
 
                 errorMessage = "";

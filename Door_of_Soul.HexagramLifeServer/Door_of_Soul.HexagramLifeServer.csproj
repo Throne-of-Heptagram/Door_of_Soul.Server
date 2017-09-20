@@ -40,8 +40,10 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="AvatarFactory.cs" />
     <Compile Include="HexagramLife.cs" />
     <Compile Include="HexagramLifeServerInitializer.cs" />
+    <Compile Include="LifeAvatar.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -64,6 +66,14 @@
     <ProjectReference Include="..\..\Door_of_Soul.Core\Door_of_Soul.Core\Door_of_Soul.Core.csproj">
       <Project>{34c59e1e-eee2-4b13-9802-39dae818abfd}</Project>
       <Name>Door_of_Soul.Core</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Door_of_Soul.Database\Door_of_Soul.Database.DataStructure\Door_of_Soul.Database.DataStructure.csproj">
+      <Project>{b23d26fc-f698-463c-9050-9dee3329a8b9}</Project>
+      <Name>Door_of_Soul.Database.DataStructure</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Door_of_Soul.Database\Door_of_Soul.Database\Door_of_Soul.Database.csproj">
+      <Project>{6f46fcdf-e62c-413e-ab14-0870fcebc412}</Project>
+      <Name>Door_of_Soul.Database</Name>
     </ProjectReference>
     <ProjectReference Include="..\Door_of_Soul.Server\Door_of_Soul.Server.csproj">
       <Project>{a86ebb94-d15d-465f-8c8d-47ebffb2d3b1}</Project>

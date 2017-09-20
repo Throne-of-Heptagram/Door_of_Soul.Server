@@ -15,7 +15,7 @@ namespace Door_of_Soul.HexagramSpaceServer
             try
             {
                 HexagramForwardOperationRouter<SpaceForwardOperationCode>.Initialize(new SpaceForwardOperationRouter());
-                HexagramOperationRequestRouter<SpaceEventCode, SpaceOperationCode>.Initialize(new SpaceOperationRequestRouter());
+                HexagramOperationRequestRouter<SpaceEventCode, SpaceOperationCode, VirtualSpace>.Initialize(new SpaceOperationRequestRouter());
                 VirtualSpace.Initialize(new HexagramSpace());
 
                 errorMessage = "";

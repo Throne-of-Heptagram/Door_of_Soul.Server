@@ -15,7 +15,7 @@ namespace Door_of_Soul.HexagramShadowServer
             try
             {
                 HexagramForwardOperationRouter<ShadowForwardOperationCode>.Initialize(new ShadowForwardOperationRouter());
-                HexagramOperationRequestRouter<ShadowEventCode, ShadowOperationCode>.Initialize(new ShadowOperationRequestRouter());
+                HexagramOperationRequestRouter<ShadowEventCode, ShadowOperationCode, VirtualShadow>.Initialize(new ShadowOperationRequestRouter());
                 VirtualShadow.Initialize(new HexagramShadow());
 
                 errorMessage = "";

@@ -15,7 +15,7 @@ namespace Door_of_Soul.HexagramEternityServer
             try
             {
                 HexagramForwardOperationRouter<EternityForwardOperationCode>.Initialize(new EternityForwardOperationRouter());
-                HexagramOperationRequestRouter<EternityEventCode, EternityOperationCode>.Initialize(new EternityOperationRequestRouter());
+                HexagramOperationRequestRouter<EternityEventCode, EternityOperationCode, VirtualEternity>.Initialize(new EternityOperationRequestRouter());
                 VirtualEternity.Initialize(new HexagramEternity());
 
                 errorMessage = "";

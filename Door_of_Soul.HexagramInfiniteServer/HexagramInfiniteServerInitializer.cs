@@ -15,7 +15,7 @@ namespace Door_of_Soul.HexagramInfiniteServer
             try
             {
                 HexagramForwardOperationRouter<InfiniteForwardOperationCode>.Initialize(new InfiniteForwardOperationRouter());
-                HexagramOperationRequestRouter<InfiniteEventCode, InfiniteOperationCode>.Initialize(new InfiniteOperationRequestRouter());
+                HexagramOperationRequestRouter<InfiniteEventCode, InfiniteOperationCode, VirtualInfinite>.Initialize(new InfiniteOperationRequestRouter());
                 VirtualInfinite.Initialize(new HexagramInfinite());
 
                 errorMessage = "";

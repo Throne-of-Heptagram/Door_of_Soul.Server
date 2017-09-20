@@ -4,5 +4,8 @@ namespace Door_of_Soul.HexagramEntranceServer
 {
     class HexagramEntranceAvatar : VirtualAvatar
     {
+        public HexagramEntranceAvatar(int avatarId, int entityId, string avatarName) : base(avatarId, entityId, avatarName)
+        {
+        }
     }
 }
