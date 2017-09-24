@@ -81,4 +81,7 @@
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <PropertyGroup>
+    <PostBuildEvent>xcopy $(ProjectDir)bin\Debug\*.dll $(ProjectDir)..\..\Door_of_Soul.ServerEnvironment\ReferenceDlls  /S /Y /I</PostBuildEvent>
+  </PropertyGroup>
 </Project>

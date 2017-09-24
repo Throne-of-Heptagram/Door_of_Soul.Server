@@ -1,13 +1,13 @@
-﻿using Door_of_Soul.Communication.ProxyServer;
-using Door_of_Soul.Core.ProxyServer;
+﻿using Door_of_Soul.Communication.TrinityServer;
+using Door_of_Soul.Core.TrinityServer;
 
-namespace Door_of_Soul.ProxyServer
+namespace Door_of_Soul.TrinityServer
 {
-    class ProxyServerResourceService : ResourceService
+    class TrinityServerResourceService : ResourceService
     {
         public override bool FindAnswer(int answerId, out TerminalAnswer answer)
         {
-            ProxyAnswer proxyAnswer;
+            TrinityAnswer proxyAnswer;
             if (AnswerFactory.Instance.Find(answerId, out proxyAnswer))
             {
                 answer = proxyAnswer;
@@ -22,7 +22,7 @@ namespace Door_of_Soul.ProxyServer
 
         public override bool FindAvatar(int avatarId, out VirtualAvatar avatar)
         {
-            ProxyAvatar proxyAvatar;
+            TrinityAvatar proxyAvatar;
             if (AvatarFactory.Instance.Find(avatarId, out proxyAvatar))
             {
                 avatar = proxyAvatar;
@@ -37,7 +37,7 @@ namespace Door_of_Soul.ProxyServer
 
         public override bool FindSoul(int soulId, out VirtualSoul soul)
         {
-            ProxySoul proxySoul;
+            TrinitySoul proxySoul;
             if (SoulFactory.Instance.Find(soulId, out proxySoul))
             {
                 soul = proxySoul;

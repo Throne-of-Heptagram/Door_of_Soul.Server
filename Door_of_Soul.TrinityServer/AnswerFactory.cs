@@ -1,8 +1,8 @@
 ﻿using Door_of_Soul.Core;
 
-namespace Door_of_Soul.ProxyServer
+namespace Door_of_Soul.TrinityServer
 {
-    class AnswerFactory : GenericSubjectRepository<int, ProxyAnswer>
+    class AnswerFactory : GenericSubjectRepository<int, TrinityAnswer>
     {
         public static AnswerFactory Instance { get; private set; } = new AnswerFactory();
 
@@ -11,9 +11,9 @@ namespace Door_of_Soul.ProxyServer
 
         }
 
-        public bool Create(int answerId, string answerName, int[] soulIds, out ProxyAnswer answer)
+        public bool Create(int answerId, string answerName, int[] soulIds, out TrinityAnswer answer)
         {
-            answer = new ProxyAnswer(answerId, answerName);
+            answer = new TrinityAnswer(answerId, answerName);
             for(int i = 0; i < soulIds.Length; i++)
             {
                 answer.LinkSoul(soulIds[i]);

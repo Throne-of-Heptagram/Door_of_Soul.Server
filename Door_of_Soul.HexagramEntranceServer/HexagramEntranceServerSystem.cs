@@ -1,72 +1,36 @@
 ﻿using Door_of_Soul.Communication.HexagramEntranceServer;
 using Door_of_Soul.Communication.HexagramEntranceServer.System;
-using Door_of_Soul.Communication.HexagramEntranceServer.Throne;
+using Door_of_Soul.Communication.HexagramEntranceServer.Throne.Device;
+using Door_of_Soul.Communication.Protocol.Internal.System;
 using Door_of_Soul.Core.HexagramEntranceServer;
 using Door_of_Soul.Core.Protocol;
+using Door_of_Soul.Database.Repository;
 
 namespace Door_of_Soul.HexagramEntranceServer
 {
     class HexagramEntranceServerSystem : VirtualSystem
     {
-        public override OperationReturnCode GetThroneAnswer(int endPointId, int answerId, out string errorMessage)
+        public override OperationReturnCode DeviceRegister(int endPointId, int deviceId, string answerName, string basicPassword, out string errorMessage)
         {
-            lock (onGetThroneAnswerResponseEventLock)
+            OperationReturnCode returnCode = AnswerRepository.Instance.IsAnswerNameValid(answerName, out errorMessage);
+            if(returnCode == OperationReturnCode.Successiful)
             {
-                HexagramEntranceAnswer answer;
-                if (AnswerFactory.Instance.Find(answerId, out answer))
-                {
-                    TerminalEndPoint endPoint;
-                    if (EndPointFactory.Instance.Find(endPointId, out endPoint))
-                    {
-                        errorMessage = "";
-                        SystemOperationResponseApi.GetHexagramEntranceAnswer(endPoint, OperationReturnCode.Successiful, errorMessage, answer);
-                        return OperationReturnCode.Successiful;
-                    }
-                    else
-                    {
-                        errorMessage = $"GetThroneAnswer Failed EndPointId:{endPointId} not existed";
-                        return OperationReturnCode.NotExisted;
-                    }
-                }
-                else
-                {
-                    int callbackId = getThroneAnswerResponseEventHandlerCounter++;
-                    GetThroneAnswerResponseEventHandler loadThroneAnswerCallback = (callbackReturnCode, callbackMessage, callbackAnswer) =>
-                    {
-                        if (callbackReturnCode == OperationReturnCode.Successiful && callbackAnswer.AnswerId == answerId)
-                        {
-                            TerminalEndPoint endPoint;
-                            if (EndPointFactory.Instance.Find(endPointId, out endPoint))
-                            {
-                                SystemOperationResponseApi.GetHexagramEntranceAnswer(endPoint, callbackReturnCode, callbackMessage, answer);
-                            }
-                            OnGetThroneAnswerResponse -= getThroneAnswerResponseEventHandlerDictionary[callbackId];
-                            getThroneAnswerResponseEventHandlerDictionary.Remove(callbackId);
-                        }
-                    };
-                    getThroneAnswerResponseEventHandlerDictionary.Add(callbackId, loadThroneAnswerCallback);
-                    OnGetThroneAnswerResponse += loadThroneAnswerCallback;
-
-                    ThroneOperationRequestApi.GetThroneAnswer(answerId);
-                    errorMessage = "";
-                    return OperationReturnCode.Successiful;
-                }
-            }
-        }
-
-        protected override bool InstantiateAnswer(int answerId, string answerName, int[] soulIds, out VirtualAnswer answer)
-        {
-            HexagramEntranceAnswer hexagramEntranceAnswer;
-            if (AnswerFactory.Instance.Create(answerId, answerName, soulIds, out hexagramEntranceAnswer))
-            {
-                answer = hexagramEntranceAnswer;
-                return true;
+                DeviceThroneOperationRequestApi.Register(endPointId, deviceId, answerName, basicPassword);
             }
             else
             {
-                answer = null;
-                return false;
+                TerminalEndPoint endPoint;
+                if (EndPointFactory.Instance.Find(endPointId, out endPoint))
+                {
+                    SystemOperationResponseApi.SendDeviceOperationResponse(endPoint, deviceId, SystemOperationCode.DeviceRegister, returnCode, errorMessage, new System.Collections.Generic.Dictionary<byte, object>());
+                }
+                else
+                {
+                    errorMessage = $"DeviceRegister Failed EndPointId:{endPointId} not existed";
+                    returnCode = OperationReturnCode.NotExisted;
+                }
             }
+            return returnCode;
         }
     }
 }

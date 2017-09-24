@@ -4,11 +4,11 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{A52596B2-9E5A-4AC6-A1BF-0B2006164A4F}</ProjectGuid>
+    <ProjectGuid>{8C27282D-03C5-4F95-8381-F9865D8331F6}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>Door_of_Soul.HexagramThroneServer</RootNamespace>
-    <AssemblyName>Door_of_Soul.HexagramThroneServer</AssemblyName>
+    <RootNamespace>Door_of_Soul.ObserverServer</RootNamespace>
+    <AssemblyName>Door_of_Soul.ObserverServer</AssemblyName>
     <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
   </PropertyGroup>
@@ -40,40 +40,41 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="AnswerFactory.cs" />
-    <Compile Include="HexagramThrone.cs" />
-    <Compile Include="HexagramThroneServerInitializer.cs" />
+    <Compile Include="EntityFactory.cs" />
+    <Compile Include="ObserverEntity.cs" />
+    <Compile Include="ObserverScene.cs" />
+    <Compile Include="ObserverWorld.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="ThroneAnswer.cs" />
+    <Compile Include="SceneFactory.cs" />
+    <Compile Include="ObserverServerInitializer.cs" />
+    <Compile Include="ObserverServerResourceService.cs" />
+    <Compile Include="ObserverServerSystem.cs" />
+    <Compile Include="WorldFactory.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\..\Door_of_Soul.Communication\Door_of_Soul.Communication.HexagramNodeServer\Door_of_Soul.Communication.HexagramNodeServer.csproj">
-      <Project>{9b95b70f-0310-43a6-8592-47c05ff610ef}</Project>
-      <Name>Door_of_Soul.Communication.HexagramNodeServer</Name>
+    <ProjectReference Include="..\..\Door_of_Soul.Communication\Door_of_Soul.Communication.ObserverServer\Door_of_Soul.Communication.ObserverServer.csproj">
+      <Project>{a6f253f2-6987-4fa8-98e7-f883741ce45f}</Project>
+      <Name>Door_of_Soul.Communication.ObserverServer</Name>
     </ProjectReference>
-    <ProjectReference Include="..\..\Door_of_Soul.Communication\Door_of_Soul.Communication.Protocol.Hexagram\Door_of_Soul.Communication.Protocol.Hexagram.csproj">
-      <Project>{d7a33245-4cc4-4528-9603-3051d6022120}</Project>
-      <Name>Door_of_Soul.Communication.Protocol.Hexagram</Name>
+    <ProjectReference Include="..\..\Door_of_Soul.Communication\Door_of_Soul.Communication.Protocol.External\Door_of_Soul.Communication.Protocol.External.csproj">
+      <Project>{747f0ed6-82fd-44dc-994b-f9d2b9dde3f9}</Project>
+      <Name>Door_of_Soul.Communication.Protocol.External</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Door_of_Soul.Communication\Door_of_Soul.Communication.Protocol.Internal\Door_of_Soul.Communication.Protocol.Internal.csproj">
+      <Project>{d82bd596-1a35-4e4c-bc1e-2e27cd3e9812}</Project>
+      <Name>Door_of_Soul.Communication.Protocol.Internal</Name>
     </ProjectReference>
     <ProjectReference Include="..\..\Door_of_Soul.Communication\Door_of_Soul.Communication\Door_of_Soul.Communication.csproj">
       <Project>{90c6178d-f9ee-4160-b7e6-d450afe03bec}</Project>
       <Name>Door_of_Soul.Communication</Name>
     </ProjectReference>
-    <ProjectReference Include="..\..\Door_of_Soul.Core\Door_of_Soul.Core.HexagramNodeServer\Door_of_Soul.Core.HexagramNodeServer.csproj">
-      <Project>{6dda6ed9-24fe-4036-9fa8-37279a2be41c}</Project>
-      <Name>Door_of_Soul.Core.HexagramNodeServer</Name>
+    <ProjectReference Include="..\..\Door_of_Soul.Core\Door_of_Soul.Core.ObserverServer\Door_of_Soul.Core.ObserverServer.csproj">
+      <Project>{cb83e5bf-6253-4b08-9e4f-2caa9ee277f0}</Project>
+      <Name>Door_of_Soul.Core.ObserverServer</Name>
     </ProjectReference>
     <ProjectReference Include="..\..\Door_of_Soul.Core\Door_of_Soul.Core\Door_of_Soul.Core.csproj">
       <Project>{34c59e1e-eee2-4b13-9802-39dae818abfd}</Project>
       <Name>Door_of_Soul.Core</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\..\Door_of_Soul.Database\Door_of_Soul.Database.DataStructure\Door_of_Soul.Database.DataStructure.csproj">
-      <Project>{b23d26fc-f698-463c-9050-9dee3329a8b9}</Project>
-      <Name>Door_of_Soul.Database.DataStructure</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\..\Door_of_Soul.Database\Door_of_Soul.Database\Door_of_Soul.Database.csproj">
-      <Project>{6f46fcdf-e62c-413e-ab14-0870fcebc412}</Project>
-      <Name>Door_of_Soul.Database</Name>
     </ProjectReference>
     <ProjectReference Include="..\Door_of_Soul.Server\Door_of_Soul.Server.csproj">
       <Project>{a86ebb94-d15d-465f-8c8d-47ebffb2d3b1}</Project>

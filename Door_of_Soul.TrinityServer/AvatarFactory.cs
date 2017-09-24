@@ -1,8 +1,8 @@
 ﻿using Door_of_Soul.Core;
 
-namespace Door_of_Soul.ProxyServer
+namespace Door_of_Soul.TrinityServer
 {
-    class AvatarFactory : GenericSubjectRepository<int, ProxyAvatar>
+    class AvatarFactory : GenericSubjectRepository<int, TrinityAvatar>
     {
         public static AvatarFactory Instance { get; private set; } = new AvatarFactory();
 
@@ -11,9 +11,9 @@ namespace Door_of_Soul.ProxyServer
 
         }
 
-        public bool Create(int avatarId, int entityId, string avatarName, int[] soulIds, out ProxyAvatar avatar)
+        public bool Create(int avatarId, int entityId, string avatarName, int[] soulIds, out TrinityAvatar avatar)
         {
-            avatar = new ProxyAvatar(avatarId, entityId, avatarName);
+            avatar = new TrinityAvatar(avatarId, entityId, avatarName);
             for (int i = 0; i < soulIds.Length; i++)
             {
                 avatar.LinkSoul(soulIds[i]);
