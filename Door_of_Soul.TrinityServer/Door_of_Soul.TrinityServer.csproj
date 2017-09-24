@@ -1,14 +1,14 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<Project ToolsVersion="14.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+<Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{98AB15C5-80B3-4FB8-AC42-DA103F19C182}</ProjectGuid>
+    <ProjectGuid>{A0BE9712-CE81-4AA3-811D-23891A95F398}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>Door_of_Soul.ProxyServer</RootNamespace>
-    <AssemblyName>Door_of_Soul.ProxyServer</AssemblyName>
+    <RootNamespace>Door_of_Soul.TrinityServer</RootNamespace>
+    <AssemblyName>Door_of_Soul.TrinityServer</AssemblyName>
     <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
   </PropertyGroup>
@@ -43,26 +43,34 @@
     <Compile Include="AnswerFactory.cs" />
     <Compile Include="AvatarFactory.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="ProxyAnswer.cs" />
-    <Compile Include="ProxyAvatar.cs" />
-    <Compile Include="ProxyServerInitializer.cs" />
-    <Compile Include="ProxyServerResourceService.cs" />
-    <Compile Include="ProxyServerSystem.cs" />
-    <Compile Include="ProxySoul.cs" />
+    <Compile Include="TrinityAnswer.cs" />
+    <Compile Include="TrinityAvatar.cs" />
+    <Compile Include="TrinityServerInitializer.cs" />
+    <Compile Include="TrinityServerResourceService.cs" />
+    <Compile Include="TrinityServerSystem.cs" />
+    <Compile Include="TrinitySoul.cs" />
     <Compile Include="SoulFactory.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\..\Door_of_Soul.Communication\Door_of_Soul.Communication.ProxyServer\Door_of_Soul.Communication.ProxyServer.csproj">
-      <Project>{4f9ef772-8fe2-4ddd-9c96-2d62093df94d}</Project>
-      <Name>Door_of_Soul.Communication.ProxyServer</Name>
+    <ProjectReference Include="..\..\Door_of_Soul.Communication\Door_of_Soul.Communication.Protocol.External\Door_of_Soul.Communication.Protocol.External.csproj">
+      <Project>{747f0ed6-82fd-44dc-994b-f9d2b9dde3f9}</Project>
+      <Name>Door_of_Soul.Communication.Protocol.External</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Door_of_Soul.Communication\Door_of_Soul.Communication.Protocol.Internal\Door_of_Soul.Communication.Protocol.Internal.csproj">
+      <Project>{d82bd596-1a35-4e4c-bc1e-2e27cd3e9812}</Project>
+      <Name>Door_of_Soul.Communication.Protocol.Internal</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Door_of_Soul.Communication\Door_of_Soul.Communication.TrinityServer\Door_of_Soul.Communication.TrinityServer.csproj">
+      <Project>{ce89317c-b25b-4d9c-8339-7385c1284507}</Project>
+      <Name>Door_of_Soul.Communication.TrinityServer</Name>
     </ProjectReference>
     <ProjectReference Include="..\..\Door_of_Soul.Communication\Door_of_Soul.Communication\Door_of_Soul.Communication.csproj">
       <Project>{90c6178d-f9ee-4160-b7e6-d450afe03bec}</Project>
       <Name>Door_of_Soul.Communication</Name>
     </ProjectReference>
-    <ProjectReference Include="..\..\Door_of_Soul.Core\Door_of_Soul.Core.ProxyServer\Door_of_Soul.Core.ProxyServer.csproj">
-      <Project>{a5f50141-ccc2-487a-a6e6-8e40e7ec690b}</Project>
-      <Name>Door_of_Soul.Core.ProxyServer</Name>
+    <ProjectReference Include="..\..\Door_of_Soul.Core\Door_of_Soul.Core.TrinityServer\Door_of_Soul.Core.TrinityServer.csproj">
+      <Project>{9aea582d-1e5f-453a-b401-32b0fefe75a9}</Project>
+      <Name>Door_of_Soul.Core.TrinityServer</Name>
     </ProjectReference>
     <ProjectReference Include="..\..\Door_of_Soul.Core\Door_of_Soul.Core\Door_of_Soul.Core.csproj">
       <Project>{34c59e1e-eee2-4b13-9802-39dae818abfd}</Project>
@@ -82,11 +90,7 @@
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
-  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
-       Other similar extension points exist, see Microsoft.Common.targets.
-  <Target Name="BeforeBuild">
-  </Target>
-  <Target Name="AfterBuild">
-  </Target>
-  -->
+  <PropertyGroup>
+    <PostBuildEvent>xcopy $(ProjectDir)bin\Debug\*.dll $(ProjectDir)..\..\Door_of_Soul.ServerEnvironment\ReferenceDlls  /S /Y /I</PostBuildEvent>
+  </PropertyGroup>
 </Project>
