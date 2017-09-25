@@ -4,7 +4,7 @@ using Door_of_Soul.Communication.HexagramEntranceServer.Throne.Device;
 using Door_of_Soul.Communication.Protocol.Internal.System;
 using Door_of_Soul.Core.HexagramEntranceServer;
 using Door_of_Soul.Core.Protocol;
-using Door_of_Soul.Database.Repository;
+using Door_of_Soul.Database.Repository.Throne;
 
 namespace Door_of_Soul.HexagramEntranceServer
 {

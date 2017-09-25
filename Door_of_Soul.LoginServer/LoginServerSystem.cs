@@ -3,7 +3,7 @@ using Door_of_Soul.Communication.LoginServer.System;
 using Door_of_Soul.Communication.Protocol.External.System;
 using Door_of_Soul.Core.LoginServer;
 using Door_of_Soul.Core.Protocol;
-using Door_of_Soul.Database.Repository;
+using Door_of_Soul.Database.Repository.Throne;
 using System.Collections.Generic;
 
 namespace Door_of_Soul.LoginServer

@@ -3,7 +3,7 @@ using Door_of_Soul.Communication.HexagramNodeServer.Throne.Device;
 using Door_of_Soul.Communication.Protocol.Hexagram.Throne.Device;
 using Door_of_Soul.Core.HexagramNodeServer;
 using Door_of_Soul.Core.Protocol;
-using Door_of_Soul.Database.Repository;
+using Door_of_Soul.Database.Repository.Throne;
 
 namespace Door_of_Soul.HexagramThroneServer
 {

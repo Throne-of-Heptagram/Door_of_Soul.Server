@@ -69,10 +69,6 @@
       <Project>{34c59e1e-eee2-4b13-9802-39dae818abfd}</Project>
       <Name>Door_of_Soul.Core</Name>
     </ProjectReference>
-    <ProjectReference Include="..\..\Door_of_Soul.Database\Door_of_Soul.Database.DataStructure\Door_of_Soul.Database.DataStructure.csproj">
-      <Project>{b23d26fc-f698-463c-9050-9dee3329a8b9}</Project>
-      <Name>Door_of_Soul.Database.DataStructure</Name>
-    </ProjectReference>
     <ProjectReference Include="..\..\Door_of_Soul.Database\Door_of_Soul.Database\Door_of_Soul.Database.csproj">
       <Project>{6f46fcdf-e62c-413e-ab14-0870fcebc412}</Project>
       <Name>Door_of_Soul.Database</Name>
