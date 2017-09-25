@@ -4,5 +4,9 @@ namespace Door_of_Soul.HexagramElementServer
 {
     class HexagramElement : VirtualElement
     {
+        public override string ToString()
+        {
+            return $"Hexagram{base.ToString()}";
+        }
     }
 }

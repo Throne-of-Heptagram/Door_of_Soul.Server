@@ -7,5 +7,9 @@ namespace Door_of_Soul.TrinityServer
         public TrinitySoul(int soulId, string soulName, bool isActivated) : base(soulId, soulName, isActivated)
         {
         }
+        public override string ToString()
+        {
+            return $"Trinity{base.ToString()}";
+        }
     }
 }

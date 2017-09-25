@@ -10,6 +10,11 @@ namespace Door_of_Soul.LoginServer
 {
     class LoginServerSystem : VirtualSystem
     {
+        public override string ToString()
+        {
+            return $"Login{base.ToString()}";
+        }
+
         public override OperationReturnCode Register(int deviceId, string answerName, string basicPassword, out string errorMessage)
         {
             OperationReturnCode returnCode = AnswerRepository.Instance.IsAnswerNameValid(answerName, out errorMessage);

@@ -7,5 +7,9 @@ namespace Door_of_Soul.HexagramWillServer
         public WillSoul(int soulId, string soulName, bool isActivated) : base(soulId, soulName, isActivated)
         {
         }
+        public override string ToString()
+        {
+            return $"Will{base.ToString()}";
+        }
     }
 }

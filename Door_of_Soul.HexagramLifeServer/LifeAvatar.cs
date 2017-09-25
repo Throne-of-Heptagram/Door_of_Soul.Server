@@ -7,5 +7,9 @@ namespace Door_of_Soul.HexagramLifeServer
         public LifeAvatar(int avatarId, int entityId, string avatarName) : base(avatarId, entityId, avatarName)
         {
         }
+        public override string ToString()
+        {
+            return $"Life{base.ToString()}";
+        }
     }
 }

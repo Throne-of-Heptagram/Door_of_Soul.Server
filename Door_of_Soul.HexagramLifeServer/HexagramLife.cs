@@ -4,6 +4,9 @@ namespace Door_of_Soul.HexagramLifeServer
 {
     class HexagramLife : VirtualLife
     {
-
+        public override string ToString()
+        {
+            return $"Hexagram{base.ToString()}";
+        }
     }
 }

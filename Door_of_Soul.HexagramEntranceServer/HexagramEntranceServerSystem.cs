@@ -10,6 +10,11 @@ namespace Door_of_Soul.HexagramEntranceServer
 {
     class HexagramEntranceServerSystem : VirtualSystem
     {
+        public override string ToString()
+        {
+            return $"Entrance{base.ToString()}";
+        }
+
         public override OperationReturnCode DeviceRegister(int endPointId, int deviceId, string answerName, string basicPassword, out string errorMessage)
         {
             OperationReturnCode returnCode = AnswerRepository.Instance.IsAnswerNameValid(answerName, out errorMessage);

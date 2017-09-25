@@ -7,5 +7,9 @@ namespace Door_of_Soul.HexagramEntranceServer
         public HexagramEntranceAnswer(int answerId, string answerName) : base(answerId, answerName)
         {
         }
+        public override string ToString()
+        {
+            return $"Entrance{base.ToString()}";
+        }
     }
 }

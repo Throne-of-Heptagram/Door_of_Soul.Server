@@ -7,5 +7,9 @@ namespace Door_of_Soul.HexagramThroneServer
         public ThroneAnswer(int answerId, string answerName) : base(answerId, answerName)
         {
         }
+        public override string ToString()
+        {
+            return $"Throne{base.ToString()}";
+        }
     }
 }

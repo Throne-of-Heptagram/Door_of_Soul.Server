@@ -4,6 +4,11 @@ namespace Door_of_Soul.HexagramSpaceServer
 {
     class HexagramSpace : VirtualSpace
     {
+        public override string ToString()
+        {
+            return $"Hexagram{base.ToString()}";
+        }
+
         public override bool FindScene(int sceneId, out VirtualScene scene)
         {
             throw new System.NotImplementedException();
