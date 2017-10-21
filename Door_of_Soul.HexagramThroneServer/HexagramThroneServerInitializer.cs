@@ -1,5 +1,6 @@
-﻿using Door_of_Soul.Communication.HexagramNodeServer.Hexagram;
-using Door_of_Soul.Communication.HexagramNodeServer.Hexagram.OperationRouter;
+﻿using Door_of_Soul.Communication.HexagramNodeServer;
+using Door_of_Soul.Communication.HexagramNodeServer.HexagramCentral;
+using Door_of_Soul.Communication.HexagramNodeServer.HexagramCentral.OperationRouter;
 using Door_of_Soul.Communication.HexagramNodeServer.Throne;
 using Door_of_Soul.Communication.Protocol.Hexagram.Throne;
 using Door_of_Soul.Core.HexagramNodeServer;
@@ -15,7 +16,7 @@ namespace Door_of_Soul.HexagramThroneServer
             try
             {
                 HexagramForwardOperationRouter<ThroneForwardOperationCode>.Initialize(new ThroneForwardOperationRouter());
-                HexagramOperationRequestRouter<ThroneEventCode, ThroneOperationCode, VirtualThrone>.Initialize(new ThroneOperationRequestRouter());
+                HexagramOperationRequestRouter<ThroneHexagramEntrance, VirtualThrone, ThroneOperationCode>.Initialize(new ThroneOperationRequestRouter());
                 VirtualThrone.Initialize(new HexagramThrone());
 
                 errorMessage = "";

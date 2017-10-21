@@ -1,5 +1,6 @@
-﻿using Door_of_Soul.Communication.HexagramNodeServer.Hexagram;
-using Door_of_Soul.Communication.HexagramNodeServer.Hexagram.OperationRouter;
+﻿using Door_of_Soul.Communication.HexagramNodeServer;
+using Door_of_Soul.Communication.HexagramNodeServer.HexagramCentral;
+using Door_of_Soul.Communication.HexagramNodeServer.HexagramCentral.OperationRouter;
 using Door_of_Soul.Communication.HexagramNodeServer.History;
 using Door_of_Soul.Communication.Protocol.Hexagram.History;
 using Door_of_Soul.Core.HexagramNodeServer;
@@ -15,7 +16,7 @@ namespace Door_of_Soul.HexagramHistoryServer
             try
             {
                 HexagramForwardOperationRouter<HistoryForwardOperationCode>.Initialize(new HistoryForwardOperationRouter());
-                HexagramOperationRequestRouter<HistoryEventCode, HistoryOperationCode, VirtualHistory>.Initialize(new HistoryOperationRequestRouter());
+                HexagramOperationRequestRouter<HistoryHexagramEntrance, VirtualHistory, HistoryOperationCode>.Initialize(new HistoryOperationRequestRouter());
                 VirtualHistory.Initialize(new HexagramHistory());
 
                 errorMessage = "";

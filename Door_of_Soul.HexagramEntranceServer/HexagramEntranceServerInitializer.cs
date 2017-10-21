@@ -12,7 +12,7 @@ namespace Door_of_Soul.HexagramEntranceServer
             try
             {
                 ResourceService.Initialize(new HexagramEntranceServerResourceService());
-                VirtualSystem.Initialize(new HexagramEntranceServerSystem());
+                VirtualSystem.Initialize(new HexagramEntranceSystem());
 
                 errorMessage = "";
                 return true;

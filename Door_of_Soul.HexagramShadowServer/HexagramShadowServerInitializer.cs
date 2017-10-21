@@ -1,5 +1,6 @@
-﻿using Door_of_Soul.Communication.HexagramNodeServer.Hexagram;
-using Door_of_Soul.Communication.HexagramNodeServer.Hexagram.OperationRouter;
+﻿using Door_of_Soul.Communication.HexagramNodeServer;
+using Door_of_Soul.Communication.HexagramNodeServer.HexagramCentral;
+using Door_of_Soul.Communication.HexagramNodeServer.HexagramCentral.OperationRouter;
 using Door_of_Soul.Communication.HexagramNodeServer.Shadow;
 using Door_of_Soul.Communication.Protocol.Hexagram.Shadow;
 using Door_of_Soul.Core.HexagramNodeServer;
@@ -15,7 +16,7 @@ namespace Door_of_Soul.HexagramShadowServer
             try
             {
                 HexagramForwardOperationRouter<ShadowForwardOperationCode>.Initialize(new ShadowForwardOperationRouter());
-                HexagramOperationRequestRouter<ShadowEventCode, ShadowOperationCode, VirtualShadow>.Initialize(new ShadowOperationRequestRouter());
+                HexagramOperationRequestRouter<ShadowHexagramEntrance, VirtualShadow, ShadowOperationCode >.Initialize(new ShadowOperationRequestRouter());
                 VirtualShadow.Initialize(new HexagramShadow());
 
                 errorMessage = "";

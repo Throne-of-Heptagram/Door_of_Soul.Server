@@ -1,6 +1,7 @@
-﻿using Door_of_Soul.Communication.HexagramNodeServer.Hexagram;
-using Door_of_Soul.Communication.HexagramNodeServer.Hexagram.OperationRouter;
+﻿using Door_of_Soul.Communication.HexagramNodeServer;
 using Door_of_Soul.Communication.HexagramNodeServer.Eternity;
+using Door_of_Soul.Communication.HexagramNodeServer.HexagramCentral;
+using Door_of_Soul.Communication.HexagramNodeServer.HexagramCentral.OperationRouter;
 using Door_of_Soul.Communication.Protocol.Hexagram.Eternity;
 using Door_of_Soul.Core.HexagramNodeServer;
 using Door_of_Soul.Server;
@@ -15,7 +16,7 @@ namespace Door_of_Soul.HexagramEternityServer
             try
             {
                 HexagramForwardOperationRouter<EternityForwardOperationCode>.Initialize(new EternityForwardOperationRouter());
-                HexagramOperationRequestRouter<EternityEventCode, EternityOperationCode, VirtualEternity>.Initialize(new EternityOperationRequestRouter());
+                HexagramOperationRequestRouter<EternityHexagramEntrance, VirtualEternity, EternityOperationCode>.Initialize(new EternityOperationRequestRouter());
                 VirtualEternity.Initialize(new HexagramEternity());
 
                 errorMessage = "";

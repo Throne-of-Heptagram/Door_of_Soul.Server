@@ -1,5 +1,6 @@
-﻿using Door_of_Soul.Communication.HexagramNodeServer.Hexagram;
-using Door_of_Soul.Communication.HexagramNodeServer.Hexagram.OperationRouter;
+﻿using Door_of_Soul.Communication.HexagramNodeServer.HexagramCentral;
+using Door_of_Soul.Communication.HexagramNodeServer.HexagramCentral.OperationRouter;
+using Door_of_Soul.Communication.HexagramNodeServer;
 using Door_of_Soul.Communication.HexagramNodeServer.Knowledge;
 using Door_of_Soul.Communication.Protocol.Hexagram.Knowledge;
 using Door_of_Soul.Core.HexagramNodeServer;
@@ -15,7 +16,7 @@ namespace Door_of_Soul.HexagramKnowledgeServer
             try
             {
                 HexagramForwardOperationRouter<KnowledgeForwardOperationCode>.Initialize(new KnowledgeForwardOperationRouter());
-                HexagramOperationRequestRouter<KnowledgeEventCode, KnowledgeOperationCode, VirtualKnowledge>.Initialize(new KnowledgeOperationRequestRouter());
+                HexagramOperationRequestRouter<KnowledgeHexagramEntrance, VirtualKnowledge, KnowledgeOperationCode>.Initialize(new KnowledgeOperationRequestRouter());
                 VirtualKnowledge.Initialize(new HexagramKnowledge());
 
                 errorMessage = "";

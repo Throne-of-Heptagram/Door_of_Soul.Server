@@ -49,7 +49,7 @@
     <Compile Include="HexagramEntranceScene.cs" />
     <Compile Include="HexagramEntranceServerInitializer.cs" />
     <Compile Include="HexagramEntranceServerResourceService.cs" />
-    <Compile Include="HexagramEntranceServerSystem.cs" />
+    <Compile Include="HexagramEntranceSystem.cs" />
     <Compile Include="HexagramEntranceSoul.cs" />
     <Compile Include="HexagramEntranceWorld.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

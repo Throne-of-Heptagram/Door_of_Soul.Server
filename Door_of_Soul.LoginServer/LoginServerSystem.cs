@@ -1,6 +1,7 @@
 ﻿using Door_of_Soul.Communication.LoginServer;
 using Door_of_Soul.Communication.LoginServer.System;
 using Door_of_Soul.Communication.Protocol.External.System;
+using Door_of_Soul.Core;
 using Door_of_Soul.Core.LoginServer;
 using Door_of_Soul.Core.Protocol;
 using Door_of_Soul.Database.DataStructure;
@@ -12,11 +13,6 @@ namespace Door_of_Soul.LoginServer
 {
     class LoginServerSystem : VirtualSystem
     {
-        public override event GetAnswerTrinityServerResponseEventHandler OnGetAnswerTrinityServer;
-        private int onGetAnswerTrinityServerEventIdCounter = 0;
-        private object onGetAnswerTrinityServerEventLock = new object();
-        private Dictionary<int, GetAnswerTrinityServerResponseEventHandler> onGetAnswerTrinityServerEventDictionary = new Dictionary<int, GetAnswerTrinityServerResponseEventHandler>();
-
         public override string ToString()
         {
             return $"Login{base.ToString()}";
@@ -51,43 +47,37 @@ namespace Door_of_Soul.LoginServer
             OperationReturnCode returnCode = AnswerRepository.Instance.Login(answerName, basicPassword, out errorMessage, out answerId);
             if (returnCode == OperationReturnCode.Successiful)
             {
-                lock(onGetAnswerTrinityServerEventLock)
+                TerminalDevice dependentDevice;
+                List<IEventDependencyReleasable> eventDependentTargets = new List<IEventDependencyReleasable>();
+                if(DeviceFactory.Instance.Find(deviceId, out dependentDevice))
                 {
-                    int callbackId = onGetAnswerTrinityServerEventIdCounter++;
-                    GetAnswerTrinityServerResponseEventHandler callbackFunction = (callbackReturnCode, callbackOperationMessage, callbackTrinityServerEndPointId, callbackAnswerId, callbackAnswerAccessToken) => 
-                    {
-                        if (callbackAnswerId != answerId)
-                            return;
-                        lock (onGetAnswerTrinityServerEventLock)
-                        {
-                            TerminalDevice device;
-                            EndPointData trinityServerEndPointData;
-                            string message;
-                            returnCode = EndPointRepository.Instance.Read(callbackTrinityServerEndPointId, out message, out trinityServerEndPointData);
-                            if (returnCode == OperationReturnCode.Successiful && DeviceFactory.Instance.Find(deviceId, out device))
-                            {
-                                SystemOperationResponseApi.Login(
-                                    terminal: device,
-                                    returnCode: callbackReturnCode,
-                                    operationMessage: callbackOperationMessage,
-                                    trinityServerAddress: trinityServerEndPointData.serverAddresses,
-                                    trinityServerPort: trinityServerEndPointData.serverPort,
-                                    trinityServerApplicationName: trinityServerEndPointData.serverApplicationName,
-                                    answerId: callbackAnswerId,
-                                    answerAccessToken: callbackAnswerAccessToken);
-                            }
-                            if (onGetAnswerTrinityServerEventDictionary.ContainsKey(callbackId))
-                            {
-                                var self = onGetAnswerTrinityServerEventDictionary[callbackId];
-                                OnGetAnswerTrinityServer -= self;
-                                onGetAnswerTrinityServerEventDictionary.Remove(callbackId);
-                            }
-                        }
-                    };
-                    onGetAnswerTrinityServerEventDictionary.Add(callbackId, callbackFunction);
-                    OnGetAnswerTrinityServer += callbackFunction;
-                    returnCode = GetAnswerTrinityServer(answerId, out errorMessage);
+                    eventDependentTargets.Add(dependentDevice);
                 }
+                OnGetAnswerTrinityServer.RegisterEvent(
+                    eventHandler: (callbackSubject, eventParameter) =>
+                    {
+                        if (eventParameter.answerId != answerId)
+                            return false;
+                        TerminalDevice device;
+                        EndPointData trinityServerEndPointData;
+                        string message;
+                        returnCode = EndPointRepository.Instance.Read(eventParameter.trinityServerEndPointId, out message, out trinityServerEndPointData);
+                        if (returnCode == OperationReturnCode.Successiful && DeviceFactory.Instance.Find(deviceId, out device))
+                        {
+                            SystemOperationResponseApi.Login(
+                                terminal: device,
+                                returnCode: eventParameter.returnCode,
+                                operationMessage: eventParameter.operationMessage,
+                                trinityServerAddress: trinityServerEndPointData.serverAddresses,
+                                trinityServerPort: trinityServerEndPointData.serverPort,
+                                trinityServerApplicationName: trinityServerEndPointData.serverApplicationName,
+                                answerId: eventParameter.answerId,
+                                answerAccessToken: eventParameter.answerAccessToken);
+                        }
+                        return true;
+                    },
+                    dependentTargets: eventDependentTargets);
+                returnCode = GetAnswerTrinityServer(answerId, out errorMessage);
             }
             return returnCode;
         }
@@ -99,9 +89,9 @@ namespace Door_of_Soul.LoginServer
             return OperationReturnCode.Successiful;
         }
 
-        public override void GetAnswerTrinityServerResponse(OperationReturnCode returnCode, string operationMessage, int trinityServerEndPointId, int answerId, string answerAccessToken)
+        public override void GetAnswerTrinityServerResponse(GetAnswerTrinityServerResponseParameter responseParameter)
         {
-            OnGetAnswerTrinityServer?.Invoke(returnCode, operationMessage, trinityServerEndPointId, answerId, answerAccessToken);
+            OnGetAnswerTrinityServer.InvokeEvent(responseParameter);
         }
     }
 }

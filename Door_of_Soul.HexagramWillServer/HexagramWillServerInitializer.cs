@@ -1,5 +1,6 @@
-﻿using Door_of_Soul.Communication.HexagramNodeServer.Hexagram;
-using Door_of_Soul.Communication.HexagramNodeServer.Hexagram.OperationRouter;
+﻿using Door_of_Soul.Communication.HexagramNodeServer;
+using Door_of_Soul.Communication.HexagramNodeServer.HexagramCentral;
+using Door_of_Soul.Communication.HexagramNodeServer.HexagramCentral.OperationRouter;
 using Door_of_Soul.Communication.HexagramNodeServer.Will;
 using Door_of_Soul.Communication.Protocol.Hexagram.Will;
 using Door_of_Soul.Core.HexagramNodeServer;
@@ -15,7 +16,7 @@ namespace Door_of_Soul.HexagramWillServer
             try
             {
                 HexagramForwardOperationRouter<WillForwardOperationCode>.Initialize(new WillForwardOperationRouter());
-                HexagramOperationRequestRouter<WillEventCode, WillOperationCode, VirtualWill>.Initialize(new WillOperationRequestRouter());
+                HexagramOperationRequestRouter<WillHexagramEntrance, VirtualWill, WillOperationCode>.Initialize(new WillOperationRequestRouter());
                 VirtualWill.Initialize(new HexagramWill());
 
                 errorMessage = "";

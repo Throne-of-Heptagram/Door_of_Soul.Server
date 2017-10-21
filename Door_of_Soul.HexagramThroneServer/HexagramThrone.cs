@@ -2,20 +2,21 @@
 using Door_of_Soul.Communication.HexagramNodeServer.Throne.Device;
 using Door_of_Soul.Communication.HexagramNodeServer.Throne;
 using Door_of_Soul.Communication.Protocol.Hexagram.Throne.Device;
+using Door_of_Soul.Core;
 using Door_of_Soul.Core.HexagramNodeServer;
 using Door_of_Soul.Core.Protocol;
 using Door_of_Soul.Database.Repository.Throne;
 using System.Collections.Generic;
-using System.Linq;
+using System;
 
 namespace Door_of_Soul.HexagramThroneServer
 {
     class HexagramThrone : VirtualThrone
     {
-        public override event GetAnswerTrinityServerResponseEventHandler OnGetAnswerTrinityServer;
-        private int onGetAnswerTrinityServerEventIdCounter = 0;
-        private object onGetAnswerTrinityServerEventLock = new object();
-        private Dictionary<int, GetAnswerTrinityServerResponseEventHandler> onGetAnswerTrinityServerEventDictionary = new Dictionary<int, GetAnswerTrinityServerResponseEventHandler>();
+        private HashSet<int> waitingForAssignAnswerIdSet = new HashSet<int>();
+
+        private object getAnswerTrinityServerLock = new object();
+        private object assignAnswerLock = new object();
 
         private int HexagramEntranceIdForAssignAnswer
         {
@@ -61,7 +62,7 @@ namespace Door_of_Soul.HexagramThroneServer
         {
             errorMessage = "";
             OperationReturnCode returnCode = OperationReturnCode.Successiful;
-            lock (onGetAnswerTrinityServerEventLock)
+            lock (getAnswerTrinityServerLock)
             {
                 ThroneAnswer answer;
                 if (AnswerFactory.Instance.Find(answerId, out answer))
@@ -85,45 +86,89 @@ namespace Door_of_Soul.HexagramThroneServer
                 }
                 else
                 {
-                    int callbackId = onGetAnswerTrinityServerEventIdCounter++;
-                    GetAnswerTrinityServerResponseEventHandler callbackFunction = (callbackReturnCode, callbackOperationMessage, callbackTrinityServerEndPointId, callbackAnswerId, callbackAnswerAccessToken) =>
+                    ThroneHexagramEntrance dependentEntrance;
+                    List<IEventDependencyReleasable> eventDependentTargets = new List<IEventDependencyReleasable>();
+                    if (ThroneHexagramEntranceFactory.Instance.Find(entranceId, out dependentEntrance))
                     {
-                        if (callbackAnswerId != answerId)
-                            return;
-                        lock (onGetAnswerTrinityServerEventLock)
+                        eventDependentTargets.Add(dependentEntrance);
+                    }
+                    OnAssignAnswer.RegisterEvent(
+                        eventHandler: (callbackSubject, eventParameter) =>
                         {
-                            ThroneHexagramEntrance entrance;
-                            if (ThroneHexagramEntranceFactory.Instance.Find(entranceId, out entrance))
+                            if (eventParameter.answerId != answerId)
+                                return false;
+                            if(waitingForAssignAnswerIdSet.Contains(eventParameter.answerId))
                             {
-                                ThroneOperationResponseApi.GetAnswerTrinityServer(
-                                    terminal: entrance,
-                                    returnCode: callbackReturnCode,
-                                    operationMessage: callbackOperationMessage,
-                                    trinityServerEndPointId: callbackTrinityServerEndPointId,
-                                    answerId: callbackAnswerId,
-                                    answerAccessToken: callbackAnswerAccessToken);
+                                ThroneHexagramEntrance entrance;
+                                if (ThroneHexagramEntranceFactory.Instance.Find(entranceId, out entrance))
+                                {
+                                    ThroneOperationResponseApi.GetAnswerTrinityServer(
+                                        terminal: entrance,
+                                        returnCode: eventParameter.returnCode,
+                                        operationMessage: eventParameter.operationMessage,
+                                        trinityServerEndPointId: eventParameter.trinityServerEndPointId,
+                                        answerId: eventParameter.answerId,
+                                        answerAccessToken: eventParameter.answerAccessToken);
+                                }
+                                waitingForAssignAnswerIdSet.Remove(eventParameter.answerId);
                             }
-                            if (onGetAnswerTrinityServerEventDictionary.ContainsKey(callbackId))
-                            {
-                                var self = onGetAnswerTrinityServerEventDictionary[callbackId];
-                                OnGetAnswerTrinityServer -= self;
-                                onGetAnswerTrinityServerEventDictionary.Remove(callbackId);
-                            }
-                        }
-                    };
-                    onGetAnswerTrinityServerEventDictionary.Add(callbackId, callbackFunction);
-                    OnGetAnswerTrinityServer += callbackFunction;
-
-                    //Assign Answer
-                    ThroneOperationRequestApi.GetAnswerTrinityServer(answerId);
+                            return true;
+                        },
+                        dependentTargets: eventDependentTargets);
+                    returnCode = AssignAnswer(answerId, out errorMessage);
                 }
             }
             return returnCode;
         }
 
-        public override void GetAnswerTrinityServerResponse(OperationReturnCode returnCode, string operationMessage, int trinityServerEndPointId, int answerId, string answerAccessToken)
+        public override void AssignAnswerResponse(AssignAnswerResponseParameter responseParameter)
         {
-            OnGetAnswerTrinityServer?.Invoke(returnCode, operationMessage, trinityServerEndPointId, answerId, answerAccessToken);
+            lock (getAnswerTrinityServerLock)
+            {
+                lock(assignAnswerLock)
+                {
+                    OnAssignAnswer.InvokeEvent(responseParameter);
+                }
+            }
+        }
+
+        public override OperationReturnCode AssignAnswer(int answerId, out string errorMessage)
+        {
+            lock (assignAnswerLock)
+            {
+                if (waitingForAssignAnswerIdSet.Contains(answerId))
+                {
+                    errorMessage = "";
+                    return OperationReturnCode.Successiful;
+                }
+                else
+                {
+                    waitingForAssignAnswerIdSet.Add(answerId);
+                    int targetEntranceId = HexagramEntranceIdForAssignAnswer;
+                    ThroneHexagramEntrance targetEntrance;
+                    if (ThroneHexagramEntranceFactory.Instance.Find(targetEntranceId, out targetEntrance))
+                    {
+                        targetEntrance.OnDisconnected += () =>
+                        {
+                            AssignAnswerResponse(new AssignAnswerResponseParameter
+                            {
+                                returnCode = OperationReturnCode.TargetDisconnected,
+                                operationMessage = $"AssignAnswer target HexagramEntranceId:{targetEntranceId} disconnected",
+                            });
+                        };
+
+                        targetEntrance.IncreaseAccessAnswerCount();
+                        ThroneInverseOperationRequestApi.AssignAnswer(targetEntrance, answerId);
+                        errorMessage = "";
+                        return OperationReturnCode.Successiful;
+                    }
+                    else
+                    {
+                        errorMessage = $"ThroneHexagramEntrance Id:{targetEntranceId} not existed";
+                        return OperationReturnCode.NotExisted;
+                    }
+                }
+            }
         }
     }
 }

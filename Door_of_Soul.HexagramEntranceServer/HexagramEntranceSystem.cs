@@ -3,6 +3,7 @@ using Door_of_Soul.Communication.HexagramEntranceServer.System;
 using Door_of_Soul.Communication.HexagramEntranceServer.Throne;
 using Door_of_Soul.Communication.HexagramEntranceServer.Throne.Device;
 using Door_of_Soul.Communication.Protocol.Internal.System;
+using Door_of_Soul.Core;
 using Door_of_Soul.Core.HexagramEntranceServer;
 using Door_of_Soul.Core.Protocol;
 using Door_of_Soul.Database.Repository.Throne;
@@ -10,12 +11,9 @@ using System.Collections.Generic;
 
 namespace Door_of_Soul.HexagramEntranceServer
 {
-    class HexagramEntranceServerSystem : VirtualSystem
+    class HexagramEntranceSystem : VirtualSystem
     {
-        public override event GetAnswerTrinityServerResponseEventHandler OnGetAnswerTrinityServer;
-        private int onGetAnswerTrinityServerEventIdCounter = 0;
-        private object onGetAnswerTrinityServerEventLock = new object();
-        private Dictionary<int, GetAnswerTrinityServerResponseEventHandler> onGetAnswerTrinityServerEventDictionary = new Dictionary<int, GetAnswerTrinityServerResponseEventHandler>();
+        private object getAnswerTrinityServerLock = new object();
 
         public override string ToString()
         {
@@ -49,7 +47,7 @@ namespace Door_of_Soul.HexagramEntranceServer
         {
             errorMessage = "";
             OperationReturnCode returnCode = OperationReturnCode.Successiful;
-            lock (onGetAnswerTrinityServerEventLock)
+            lock (getAnswerTrinityServerLock)
             {
                 HexagramEntranceAnswer answer;
                 if(AnswerFactory.Instance.Find(answerId, out answer))
@@ -73,43 +71,53 @@ namespace Door_of_Soul.HexagramEntranceServer
                 }
                 else
                 {
-                    int callbackId = onGetAnswerTrinityServerEventIdCounter++;
-                    GetAnswerTrinityServerResponseEventHandler callbackFunction = (callbackReturnCode, callbackOperationMessage, callbackTrinityServerEndPointId, callbackAnswerId, callbackAnswerAccessToken) =>
+                    TerminalEndPoint dependentEndPoint;
+                    List<IEventDependencyReleasable> eventDependentTargets = new List<IEventDependencyReleasable>();
+                    if (EndPointFactory.Instance.Find(endPointId, out dependentEndPoint))
                     {
-                        if (callbackAnswerId != answerId)
-                            return;
-                        lock (onGetAnswerTrinityServerEventLock)
+                        eventDependentTargets.Add(dependentEndPoint);
+                    }
+                    OnGetAnswerTrinityServer.RegisterEvent(
+                        eventHandler: (callbackSubject, eventParameter) =>
                         {
+                            if (eventParameter.answerId != answerId)
+                                return false;
                             TerminalEndPoint endPoint;
                             if (EndPointFactory.Instance.Find(endPointId, out endPoint))
                             {
                                 SystemOperationResponseApi.GetAnswerTrinityServer(
                                     terminal: endPoint,
-                                    returnCode: callbackReturnCode,
-                                    operationMessage: callbackOperationMessage,
-                                    trinityServerEndPointId: callbackTrinityServerEndPointId,
-                                    answerId: callbackAnswerId,
-                                    answerAccessToken: callbackAnswerAccessToken);
+                                    returnCode: eventParameter.returnCode,
+                                    operationMessage: eventParameter.operationMessage,
+                                    trinityServerEndPointId: eventParameter.trinityServerEndPointId,
+                                    answerId: eventParameter.answerId,
+                                    answerAccessToken: eventParameter.answerAccessToken);
                             }
-                            if (onGetAnswerTrinityServerEventDictionary.ContainsKey(callbackId))
-                            {
-                                var self = onGetAnswerTrinityServerEventDictionary[callbackId];
-                                OnGetAnswerTrinityServer -= self;
-                                onGetAnswerTrinityServerEventDictionary.Remove(callbackId);
-                            }
-                        }
-                    };
-                    onGetAnswerTrinityServerEventDictionary.Add(callbackId, callbackFunction);
-                    OnGetAnswerTrinityServer += callbackFunction;
+                            return true;
+                        },
+                        dependentTargets: eventDependentTargets);
                     ThroneOperationRequestApi.GetAnswerTrinityServer(answerId);
                 }
             }
             return returnCode;
         }
 
-        public override void GetAnswerTrinityServerResponse(OperationReturnCode returnCode, string operationMessage, int trinityServerEndPointId, int answerId, string answerAccessToken)
+        public override void GetAnswerTrinityServerResponse(GetAnswerTrinityServerResponseParameter responseParameter)
         {
-            OnGetAnswerTrinityServer?.Invoke(returnCode, operationMessage, trinityServerEndPointId, answerId, answerAccessToken);
+            lock (getAnswerTrinityServerLock)
+            {
+                OnGetAnswerTrinityServer.InvokeEvent(responseParameter);
+            }
+        }
+
+        public override OperationReturnCode AssignAnswer(int answerId, out string errorMessage)
+        {
+            throw new System.NotImplementedException();
+        }
+
+        public override void AssignAnswerResponse(AssignAnswerResponseParameter responseParameter)
+        {
+            throw new System.NotImplementedException();
         }
     }
 }

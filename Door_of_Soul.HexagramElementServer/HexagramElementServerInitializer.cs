@@ -1,6 +1,7 @@
-﻿using Door_of_Soul.Communication.HexagramNodeServer.Hexagram;
-using Door_of_Soul.Communication.HexagramNodeServer.Hexagram.OperationRouter;
+﻿using Door_of_Soul.Communication.HexagramNodeServer;
 using Door_of_Soul.Communication.HexagramNodeServer.Element;
+using Door_of_Soul.Communication.HexagramNodeServer.HexagramCentral;
+using Door_of_Soul.Communication.HexagramNodeServer.HexagramCentral.OperationRouter;
 using Door_of_Soul.Communication.Protocol.Hexagram.Element;
 using Door_of_Soul.Core.HexagramNodeServer;
 using Door_of_Soul.Server;
@@ -15,7 +16,7 @@ namespace Door_of_Soul.HexagramElementServer
             try
             {
                 HexagramForwardOperationRouter<ElementForwardOperationCode>.Initialize(new ElementForwardOperationRouter());
-                HexagramOperationRequestRouter<ElementEventCode, ElementOperationCode, VirtualElement>.Initialize(new ElementOperationRequestRouter());
+                HexagramOperationRequestRouter<ElementHexagramEntrance, VirtualElement, ElementOperationCode>.Initialize(new ElementOperationRequestRouter());
                 VirtualElement.Initialize(new HexagramElement());
 
                 errorMessage = "";

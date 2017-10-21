@@ -11,9 +11,9 @@ namespace Door_of_Soul.HexagramEntranceServer
 
         }
 
-        public bool Create(int answerId, string answerName, int[] soulIds, out HexagramEntranceAnswer answer)
+        public bool Create(int answerId, string answerName, int accessEndPointId, string answerAccessToken, int[] soulIds, out HexagramEntranceAnswer answer)
         {
-            answer = new HexagramEntranceAnswer(answerId, answerName);
+            answer = new HexagramEntranceAnswer(answerId, answerName, accessEndPointId, answerAccessToken);
             for (int i = 0; i < soulIds.Length; i++)
             {
                 answer.LinkSoul(soulIds[i]);

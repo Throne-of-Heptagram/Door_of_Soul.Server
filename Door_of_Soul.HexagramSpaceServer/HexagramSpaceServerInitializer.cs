@@ -1,5 +1,6 @@
-﻿using Door_of_Soul.Communication.HexagramNodeServer.Hexagram;
-using Door_of_Soul.Communication.HexagramNodeServer.Hexagram.OperationRouter;
+﻿using Door_of_Soul.Communication.HexagramNodeServer;
+using Door_of_Soul.Communication.HexagramNodeServer.HexagramCentral;
+using Door_of_Soul.Communication.HexagramNodeServer.HexagramCentral.OperationRouter;
 using Door_of_Soul.Communication.HexagramNodeServer.Space;
 using Door_of_Soul.Communication.Protocol.Hexagram.Space;
 using Door_of_Soul.Core.HexagramNodeServer;
@@ -15,7 +16,7 @@ namespace Door_of_Soul.HexagramSpaceServer
             try
             {
                 HexagramForwardOperationRouter<SpaceForwardOperationCode>.Initialize(new SpaceForwardOperationRouter());
-                HexagramOperationRequestRouter<SpaceEventCode, SpaceOperationCode, VirtualSpace>.Initialize(new SpaceOperationRequestRouter());
+                HexagramOperationRequestRouter<SpaceHexagramEntrance, VirtualSpace, SpaceOperationCode>.Initialize(new SpaceOperationRequestRouter());
                 VirtualSpace.Initialize(new HexagramSpace());
 
                 errorMessage = "";
